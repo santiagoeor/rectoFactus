@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: black;
+    color: white;
+}
+
+body input,
+body select,
+body textarea {
+    color: white;
+    /* Texto blanco en los input y select en modo claro */
+}
+
+
+@media (prefers-color-shema: dark) {
+    body {
+        background-color: rgb(18, 18, 18);
+        color: white;
+
+        &::after {
+            content: "Efecto Dark Mode";
+        }
+    }
+
+    body input,
+    body select,
+    body textarea {
+        color: white;
+        /* Texto blanco en los input y select en modo claro */
+    }
+
+}
