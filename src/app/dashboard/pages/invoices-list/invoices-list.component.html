@@ -1,37 +1,28 @@
-<div class="container">
-    <div class="grid">
-        <div class="col-1 col-sm-1 col-md-1"></div>
-        <div class="col-10 col-sm-10 col-md-10">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>twitter</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-1 col-sm-1 col-md-1"></div>
+<h1 style="text-align: center;">FACTURAS</h1> <br><br>
+<div class="grid">
+
+    <div class="col-12 col-sm-12 col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Fecha Creación</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @for (item of invoices(); track item.id) {
+                <tr>
+                    <th scope="row">{{ item.number }}</th>
+                    <td>{{ item.names }}</td>
+                    <td>${{ item.total }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.created_at }}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

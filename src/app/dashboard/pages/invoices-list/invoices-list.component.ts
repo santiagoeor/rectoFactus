@@ -1,5 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Invoices } from '../../interfaces/invoices.interface';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DataInvoices, Invoices } from '../../interfaces/invoices.interface';
 import { InvoicesService } from '../../services/invoices.service';
 
 @Component({
@@ -9,23 +10,34 @@ import { InvoicesService } from '../../services/invoices.service';
   templateUrl: './invoices-list.component.html',
   styleUrl: './invoices-list.component.css'
 })
-export default class InvoicesListComponent implements OnInit {
+export default class InvoicesListComponent implements OnInit, OnDestroy {
 
   private invoicesService = inject(InvoicesService);
+
+  public invoices = signal<DataInvoices[]>([]);
+
+  private invoiceSubscription!: Subscription;
 
   ngOnInit(): void {
     this.listInvoices();
   }
 
   listInvoices() {
-    this.invoicesService.listOfInvoices().subscribe({
+    this.invoiceSubscription = this.invoicesService.listOfInvoices().subscribe({
       next: (resp: Invoices) => {
         console.log(resp);
+        this.invoices.set(resp.data.data);
       },
       error: (err) => {
         console.log(err);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.invoiceSubscription) {
+      this.invoiceSubscription.unsubscribe();
+    }
   }
 
 }

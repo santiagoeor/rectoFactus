@@ -5,11 +5,11 @@ export interface Invoices {
 }
 
 export interface Data {
-    data: Datum[];
+    data: DataInvoices[];
     pagination: Pagination;
 }
 
-export interface Datum {
+export interface DataInvoices {
     id: number;
     document: Document;
     number: string;
