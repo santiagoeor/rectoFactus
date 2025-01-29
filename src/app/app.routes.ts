@@ -12,6 +12,11 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/invoices-list/invoices-list.component'),
     },
     {
+        path: 'createInvoice',
+        title: 'Crear Factura',
+        loadComponent: () => import('./dashboard/pages/create-invoice/create-invoice.component'),
+    },
+    {
         path: '**',
         redirectTo: 'login'
     }

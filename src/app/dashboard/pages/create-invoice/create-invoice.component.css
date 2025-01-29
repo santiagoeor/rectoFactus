@@ -1,0 +1,6 @@
+.scroll-table {
+    max-height: 160px;
+    /* Ajusta la altura máxima según necesites */
+    overflow: auto;
+    /* Agrega scroll si es necesario */
+}
