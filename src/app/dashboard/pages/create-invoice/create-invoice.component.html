@@ -1,0 +1,76 @@
+<h1 style="text-align: center;">Crear Factura</h1><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="tipoClient" class="form-label">Tipo Cliente</label>
+            <select class="form-select" id="tipoClient">
+                <option value="">Seleccione</option>
+                <option value="1">Persona Jurídica</option>
+                <option value="2">Persona Natural</option>
+            </select>
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="tipoIdentifi" class="form-label">Tipo De Identificación</label>
+            <select class="form-select" id="tipoIdentifi">
+                <option value="">Seleccione</option>
+                <option value="1">Registro Civil</option>
+                <option value="2">Tarjeta de identidad</option>
+                <option value="3">Cédula de ciudadanía</option>
+                <option value="4">Tarjeta de extranjería</option>
+                <option value="5">Cédula de extranjería</option>
+                <option value="6">NIT</option>
+                <option value="7">Pasaporte</option>
+                <option value="8">Documento de identificación extranjero</option>
+                <option value="9">PEP</option>
+                <option value="10">NIT otro país</option>
+                <option value="11">NUIP</option>
+            </select>
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="identificacion" class="form-label">Identificación</label>
+            <input type="text" class="form-control" id="identificacion">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="telf" class="form-label">Telefono</label>
+            <input type="number" class="form-control" id="telf">
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="municipio" class="form-label">Municipio</label>
+            <select class="form-select" id="municipio">
+                <option value="">Seleccione</option>
+                @for (item of departments(); track item.id) {
+                <option value="{{ item.id }}">{{ item.name }} {{ item.department }}</option>
+                }
+            </select>
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="address" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="address">
+        </div>
+        <div class="col-6 col-sm-4 col-md-4">
+            <label for="iva" class="form-label">Aplica Iva</label>
+            <select class="form-select" id="iva">
+                <option value="">Seleccione</option>
+                <option value="18">Si</option>
+                <option value="21">No</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+<br><br>
+<button (click)="createInvoice()" class="btn btn-primary">Generar Factura</button>

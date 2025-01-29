@@ -10,6 +10,7 @@
                     <th scope="col">Total</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Fecha Creación</th>
+                    <th scope="col">PDF</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -20,6 +21,7 @@
                     <td>${{ item.total }}</td>
                     <td>{{ item.status }}</td>
                     <td>{{ item.created_at }}</td>
+                    <td><button (click)="pdfInvoice(item.number)" class="btn btn-primary">PDF</button></td>
                 </tr>
                 }
             </tbody>
