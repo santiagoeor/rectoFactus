@@ -5,7 +5,7 @@ export interface CreateInvoice {
     observation: string;
     payment_method_code: string;
     customer: Customer;
-    items: Item[];
+    items: ItemProducts[];
 }
 
 export interface Customer {
@@ -23,7 +23,7 @@ export interface Customer {
     municipality_id: string;
 }
 
-export interface Item {
+export interface ItemProducts {
     code_reference: string;
     name: string;
     quantity: number;

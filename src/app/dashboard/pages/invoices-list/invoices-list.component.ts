@@ -1,4 +1,5 @@
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataInvoices, Invoices } from '../../interfaces/invoices.interface';
 import { InvoicesService } from '../../services/invoices.service';
@@ -13,6 +14,7 @@ import { InvoicesService } from '../../services/invoices.service';
 export default class InvoicesListComponent implements OnInit, OnDestroy {
 
   private invoicesService = inject(InvoicesService);
+  private router = inject(Router);
 
   public invoices = signal<DataInvoices[]>([]);
 
@@ -58,6 +60,10 @@ export default class InvoicesListComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     })
+  }
+
+  redirectCreateInvoice() {
+    this.router.navigate(['./createInvoice']);
   }
 
   ngOnDestroy(): void {

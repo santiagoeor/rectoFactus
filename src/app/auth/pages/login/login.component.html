@@ -22,7 +22,10 @@
                 </app-error-forms>
                 }
             </div>
-
+            @if(errorMessageBolean()){
+            {{ errorMessage() }}
+            <br>
+            }
             <button (click)="login()" type="submit" class="btn btn-primary">Iniciar Sesión</button>
         </form>
 
