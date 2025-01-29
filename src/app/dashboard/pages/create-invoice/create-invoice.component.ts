@@ -2,11 +2,13 @@ import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 import { ErrorFormsComponent } from '../../../shared/components/error-forms/error-forms.component';
 import { ValidatorsService } from '../../../shared/services/validators.service';
 import { CreateInvoice, ItemProducts } from '../../interfaces/createInvoice.interface';
 import { DatumDepartments, Departments } from '../../interfaces/departments.interface';
 import { InvoicesService } from '../../services/invoices.service';
+import { ProductsService } from '../../services/products.service';
 
 function generateTimestamp(): string {
   const now = new Date();
@@ -30,6 +32,7 @@ function generateTimestamp(): string {
 export default class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   private invoicesService = inject(InvoicesService);
+  private productsService = inject(ProductsService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private valitarorsService = inject(ValidatorsService);
@@ -38,69 +41,14 @@ export default class CreateInvoiceComponent implements OnInit, OnDestroy {
   public productsInvoice = signal<ItemProducts[]>([]);
   public products = signal<ItemProducts[]>([]);
 
+  public loading = signal<boolean>(false);
+
   private departmentsSubscription!: Subscription;
   private createInvoiceSubscription!: Subscription;
 
   ngOnInit(): void {
     this.listDepartments();
-    this.products.set([
-      {
-        code_reference: "CO1",
-        name: "Licuadora Oster",
-        quantity: 1,
-        discount: 0,  //8403.36
-        discount_rate: 0,
-        price: 300000,
-        tax_rate: "19.00",
-        unit_measure_id: 70,
-        standard_code_id: 1,
-        is_excluded: 0, //iva
-        tribute_id: 1,
-        withholding_taxes: []
-      },
-      {
-        code_reference: "CO2",
-        name: "Televisor Samsung",
-        quantity: 1,
-        discount: 0,
-        discount_rate: 0,
-        price: 1200000,
-        tax_rate: "5.00",
-        unit_measure_id: 70,
-        standard_code_id: 1,
-        is_excluded: 0,
-        tribute_id: 1,
-        withholding_taxes: []
-      },
-      {
-        code_reference: "CO3",
-        name: "Almohadas",
-        quantity: 1,
-        discount: 0,
-        discount_rate: 0,
-        price: 60000,
-        tax_rate: "5.00",
-        unit_measure_id: 70,
-        standard_code_id: 1,
-        is_excluded: 0,
-        tribute_id: 1,
-        withholding_taxes: []
-      },
-      {
-        code_reference: "CO4",
-        name: "Silla Rimax",
-        quantity: 1,
-        discount: 0,
-        discount_rate: 0,
-        price: 80000,
-        tax_rate: "5.00",
-        unit_measure_id: 70,
-        standard_code_id: 1,
-        is_excluded: 0,
-        tribute_id: 1,
-        withholding_taxes: []
-      }
-    ]);
+    this.products.set(this.productsService.listProducts());
   }
 
   public myFormDataPerson: FormGroup = this.fb.group({
@@ -175,7 +123,13 @@ export default class CreateInvoiceComponent implements OnInit, OnDestroy {
       this.myFormDataPerson.markAllAsTouched();
     } else {
       if (this.productsInvoice().length <= 0) {
-        console.log('debe agregar productos a la factura');
+        Swal.fire({
+          position: 'center',
+          icon: 'info',
+          title: `No hay productos agregados`,
+          showConfirmButton: true,
+          confirmButtonColor: '#3085d6',
+        });
       } else {
         const code = `FACT_${generateTimestamp()}`
 
@@ -203,12 +157,28 @@ export default class CreateInvoiceComponent implements OnInit, OnDestroy {
         }
         this.myFormDataPerson.reset();
         this.productsInvoice.set([]);
+        this.loading.set(true);
         this.createInvoiceSubscription = this.invoicesService.createInvoice(data).subscribe({
           next: (resp) => {
-            console.log(resp);
+            this.loading.set(false);
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: `Factura Creada y Validada Correctamente`,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+            });
           },
           error: (err) => {
+            this.loading.set(false);
             console.log(err);
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: `Error al generar la factura`,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+            });
           }
         })
       }
