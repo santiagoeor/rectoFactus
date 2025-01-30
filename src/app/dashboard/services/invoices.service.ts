@@ -20,6 +20,10 @@ export class InvoicesService {
     return this.http.get<Invoices>(`${this.baseUrl}/v1/bills`);
   }
 
+  listOfInvoicesPage(page: number): Observable<Invoices> {
+    return this.http.get<Invoices>(`${this.baseUrl}/v1/bills?page=${page}`);
+  }
+
   createInvoice(data: CreateInvoice): Observable<any> {
     return this.http.post(`${this.baseUrl}/v1/bills/validate`, data);
   }

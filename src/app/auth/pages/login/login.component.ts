@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { enviroment } from "../../../../env/enviroment";
-import { ErrorFormsComponent } from "../../../shared/components/error-forms/error-forms.component";
+import { PrimeNgModule } from "../../../shared/prime-ng.module";
 import { ValidatorsService } from "../../../shared/services/validators.service";
 import { isTokenExpired } from "../../guards/tokenExpiration.guard";
 import { Auth } from "../../interfaces/auth.interface";
@@ -13,7 +13,7 @@ import { AuthService } from "../../services/auth.service";
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, ErrorFormsComponent],
+    imports: [CommonModule, ReactiveFormsModule, PrimeNgModule],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })

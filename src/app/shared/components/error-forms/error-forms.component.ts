@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-error-forms',
-    standalone: true,
-    template: `
+  selector: 'app-error-forms',
+  standalone: true,
+  template: `
 
-<p class="mt-1 small text-danger dark-text-red-800"><span class="font-medium">
+<b style="color: red;">
   <ng-content></ng-content>
-</span></p>
+</b>
 
   `,
-    styles: ``
+  styles: ``
 })
 export class ErrorFormsComponent {
 
