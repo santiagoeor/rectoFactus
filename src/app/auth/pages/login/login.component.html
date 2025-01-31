@@ -1,33 +1,49 @@
-<div class="login-wrapper">
-    <div class="login-container">
-        <form [formGroup]="myForm">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    formControlName="user">
-                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                @if (isValidField( 'user')) {
-                <app-error-forms>
-                    {{ getFieldError( 'user') }}
-                </app-error-forms>
-                }
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
-                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                @if (isValidField( 'password')) {
-                <app-error-forms>
-                    {{ getFieldError( 'password') }}
-                </app-error-forms>
-                }
-            </div>
-            @if(errorMessageBolean()){
-            {{ errorMessage() }}
-            <br>
-            }
-            <button (click)="login()" type="submit" class="btn btn-primary">Iniciar Sesión</button>
-        </form>
+<div class="flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
 
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div
+            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <img src="assets/logo/codenova.webp" alt="Image" height="50" class="mb-3"><br>
+                    <div class="text-900 text-xl font-medium mb-3">
+                        @if (loading()) {
+                        <h1><i class="pi pi-spin pi-sync" style="font-size: 2rem"></i>Cargando</h1>
+                        }@else if (!loading()) {
+                        <!-- <h1>Iniciar Sesión<a class="iconoPruebas pi pi-wrench" href="#"></a></h1> -->
+                        <h1>Iniciar Sesión</h1>
+                        }
+
+                        @if (errorMessageBolean()) {
+                        <span><b style="color: red;">{{ errorMessage() }}</b></span><br><br>
+                        }
+
+                    </div>
+
+                </div>
+
+                <div>
+                    <form [formGroup]="myForm" autocomplete="off">
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario</label>
+                        <input id="email1" type="text" formControlName="user" pInputText class="w-full md:w-30rem mb-3"
+                            style="padding:1rem"><br>
+                        @if (isValidField('user')) {
+                        <b style="color: red;">{{ getFieldError('user') }}</b>
+                        }
+
+
+                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
+                        <p-password id="password1" formControlName="password" [toggleMask]="true" styleClass="mb-3"
+                            inputStyleClass="w-full p-3 md:w-30rem"></p-password><br>
+                        @if (isValidField('password')) {
+                        <b style="color: red;">Este campo es requerido</b>
+                        }
+
+                        <button (click)="login()" pButton pRipple label="Iniciar Sesión"
+                            class="w-full p-2 text-xl"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

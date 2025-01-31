@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ItemProducts } from '../interfaces/createInvoice.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProductsService {
 
 
-  listProducts() {
+  listProducts(): ItemProducts[] {
     return [
       {
         code_reference: "CO1",
@@ -29,7 +30,7 @@ export class ProductsService {
         discount: 0,
         discount_rate: 0,
         price: 1200000,
-        tax_rate: "5.00",
+        tax_rate: "19.00",
         unit_measure_id: 70,
         standard_code_id: 1,
         is_excluded: 0,
@@ -43,7 +44,7 @@ export class ProductsService {
         discount: 0,
         discount_rate: 0,
         price: 60000,
-        tax_rate: "5.00",
+        tax_rate: "19.00",
         unit_measure_id: 70,
         standard_code_id: 1,
         is_excluded: 0,
@@ -57,7 +58,7 @@ export class ProductsService {
         discount: 0,
         discount_rate: 0,
         price: 80000,
-        tax_rate: "5.00",
+        tax_rate: "19.00",
         unit_measure_id: 70,
         standard_code_id: 1,
         is_excluded: 0,

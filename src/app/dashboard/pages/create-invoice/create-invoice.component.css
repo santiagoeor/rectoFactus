@@ -1,6 +1,33 @@
-.scroll-table {
-    max-height: 160px;
-    /* Ajusta la altura máxima según necesites */
-    overflow: auto;
-    /* Agrega scroll si es necesario */
+.custom-input {
+    width: 100%;
+    /* Establece el ancho deseado */
+}
+
+
+.select-container {
+    display: flex;
+    justify-content: left;
+    position: relative;
+    min-width: 250px;
+    height: 40px;
+}
+
+.custom-select {
+    border: 2px solid #050000;
+    /* appearance: none; */
+    padding: 0 30px 0 15px;
+    width: 100%;
+    /* color: #1f2d40; */
+    background-color: #1f2d40;
+    font-size: 20px;
+}
+
+.custom-select-iva {
+    border: 2px solid #050000;
+    /* appearance: none; */
+    padding: 0 30px 0 15px;
+    width: 80%;
+    /* color: #1f2d40; */
+    background-color: #1f2d40;
+    font-size: 20px;
 }

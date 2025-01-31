@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ErrorFormsComponent } from '../../../shared/components/error-forms/error-forms.component';
+import { PrimeNgModule } from '../../../shared/prime-ng.module';
 import { ValidatorsService } from '../../../shared/services/validators.service';
+import { BestMenuComponent } from '../../components/best-menu/best-menu.component';
 import { CreateInvoice, ItemProducts } from '../../interfaces/createInvoice.interface';
 import { DatumDepartments, Departments } from '../../interfaces/departments.interface';
+import { ResponseCreateInvoice } from '../../interfaces/responseCreateInvoice.interface';
 import { InvoicesService } from '../../services/invoices.service';
 import { ProductsService } from '../../services/products.service';
 
@@ -25,7 +28,7 @@ function generateTimestamp(): string {
 @Component({
   selector: 'app-create-invoice',
   standalone: true,
-  imports: [ReactiveFormsModule, ErrorFormsComponent],
+  imports: [ReactiveFormsModule, ErrorFormsComponent, PrimeNgModule, BestMenuComponent],
   templateUrl: './create-invoice.component.html',
   styleUrl: './create-invoice.component.css'
 })
@@ -159,7 +162,7 @@ export default class CreateInvoiceComponent implements OnInit, OnDestroy {
         this.productsInvoice.set([]);
         this.loading.set(true);
         this.createInvoiceSubscription = this.invoicesService.createInvoice(data).subscribe({
-          next: (resp) => {
+          next: (resp: ResponseCreateInvoice) => {
             this.loading.set(false);
             Swal.fire({
               position: 'center',
