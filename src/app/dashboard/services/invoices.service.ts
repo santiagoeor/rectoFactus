@@ -6,6 +6,7 @@ import { CreateInvoice } from '../interfaces/createInvoice.interface';
 import { DatumDepartments } from '../interfaces/departments.interface';
 import { Invoices } from '../interfaces/invoices.interface';
 import { PDFInvoice } from '../interfaces/pdfInvoice.interface';
+import { ResponseCreateInvoice } from '../interfaces/responseCreateInvoice.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class InvoicesService {
     return this.http.get<Invoices>(`${this.baseUrl}/v1/bills?page=${page}`);
   }
 
-  createInvoice(data: CreateInvoice): Observable<any> {
-    return this.http.post(`${this.baseUrl}/v1/bills/validate`, data);
+  createInvoice(data: CreateInvoice): Observable<ResponseCreateInvoice> {
+    return this.http.post<ResponseCreateInvoice>(`${this.baseUrl}/v1/bills/validate`, data);
   }
 
   departmentsListing(): Observable<DatumDepartments> {

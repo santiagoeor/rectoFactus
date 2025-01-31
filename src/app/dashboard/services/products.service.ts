@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ItemProducts } from '../interfaces/createInvoice.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProductsService {
 
 
-  listProducts() {
+  listProducts(): ItemProducts[] {
     return [
       {
         code_reference: "CO1",

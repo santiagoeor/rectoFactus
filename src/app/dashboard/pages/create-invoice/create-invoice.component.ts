@@ -9,6 +9,7 @@ import { ValidatorsService } from '../../../shared/services/validators.service';
 import { BestMenuComponent } from '../../components/best-menu/best-menu.component';
 import { CreateInvoice, ItemProducts } from '../../interfaces/createInvoice.interface';
 import { DatumDepartments, Departments } from '../../interfaces/departments.interface';
+import { ResponseCreateInvoice } from '../../interfaces/responseCreateInvoice.interface';
 import { InvoicesService } from '../../services/invoices.service';
 import { ProductsService } from '../../services/products.service';
 
@@ -161,7 +162,7 @@ export default class CreateInvoiceComponent implements OnInit, OnDestroy {
         this.productsInvoice.set([]);
         this.loading.set(true);
         this.createInvoiceSubscription = this.invoicesService.createInvoice(data).subscribe({
-          next: (resp) => {
+          next: (resp: ResponseCreateInvoice) => {
             this.loading.set(false);
             Swal.fire({
               position: 'center',
