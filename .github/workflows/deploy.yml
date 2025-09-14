@@ -1,4 +1,4 @@
-name: Deploy Angular to FTP
+name: Deploy Angular to FTPs
 
 on:
   push:
